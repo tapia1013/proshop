@@ -1,0 +1,22 @@
+{
+  "name": "proshop",
+  "version": "1.0.0",
+  "description": "MERN shopping cart app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tapia1013/proshop.git"
+  },
+  "author": "Jorge",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tapia1013/proshop/issues"
+  },
+  "homepage": "https://github.com/tapia1013/proshop#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
