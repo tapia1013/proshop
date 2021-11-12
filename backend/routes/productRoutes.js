@@ -1,39 +1,29 @@
 import express from 'express';
-import asyncHandler from 'express-async-handler';
+// import asyncHandler from 'express-async-handler';
+//  // bring model
+// import Product from '../models/productModel.js';
 
 const router = express.Router();
-// bring model
-import Product from '../models/productModel.js';
+// import controllers
+import { getProducts, getProductById } from '../controllers/productControllers.js';
 
 
+
+
+// WE ARE NOW GETTING THESE ROUTES FROM THE CONTROLLER
 
 // @desc           Fetch all products
 // @routes         GET /api/products
 // @access         Public
-router.get('/', asyncHandler(async (req, res) => {
-  const products = await Product.find({})
-  // res.status(401)
-  // throw new Error('Not Authorized')
-  res.json(products)
-}))
+// router.rout for '/' we get request and call getPorducts
+router.route('/').get(getProducts)
+
+// // @desc           Fetch single product
+// // @routes         GET /api/products/:id
+// // @access         Public
+router.route('/:id').get(getProductById)
 
 
-
-// @desc           Fetch single product
-// @routes         GET /api/products/:id
-// @access         Public
-router.get('/:id', asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
-
-  // Make sure theres a product
-  if (product) {
-    res.json(product)
-  } else {
-    res.status(404)
-    throw new Error('Product not found')
-  }
-
-}))
 
 
 export default router;
