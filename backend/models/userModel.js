@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 
 // create userSchema
@@ -25,6 +26,14 @@ const userSchema = mongoose.Schema({
 }, {
   timeStamps: true
 })
+
+
+// we use this method in the userController
+// method so we can comppare encrypted password...  func(plaintextpw)
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  // compare plain text to encrypted pw
+  return await bcrypt.compare(enteredPassword, this.password)
+}
 
 
 // mongoose.model cause we want to create a model from schema above
