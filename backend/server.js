@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
 
 
@@ -13,6 +14,12 @@ connectDB();
 
 const app = express();
 
+// middleware example
+// app.use((req, res, next) => {
+//   console.log(req.originalUrl); // api/product
+//   next()
+// })
+
 
 app.get('/', (req, res) => {
   res.send('API IS RUNNING....')
@@ -20,6 +27,13 @@ app.get('/', (req, res) => {
 
 // mount the productRoutes
 app.use('/api/products', productRoutes)
+
+// anything thats not an actual route
+app.use(notFound)
+
+// error middleware
+
+app.use(errorHandler)
 
 
 const PORT = process.env.PORT || 5000
