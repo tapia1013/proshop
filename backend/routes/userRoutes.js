@@ -4,6 +4,7 @@ import {
   authUser,
   registerUser,
   getUserProfile,
+  updateUserProfile
 } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
@@ -11,7 +12,8 @@ import { protect } from '../middleware/authMiddleware.js';
 router.route('/').post(registerUser)
 // authUser has all the logic and is the controllers folder
 router.post('/login', authUser);
-router.route('/profile').get(protect, getUserProfile);
+// (getuserprofile).put(for updated updateUserProfile with protect)
+router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile)
 
 
 
