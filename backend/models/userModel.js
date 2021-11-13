@@ -36,6 +36,20 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 }
 
 
+// Before we save new registered user we encrypt
+userSchema.pre('save', async function (next) {
+  // if its not been sent or modified do this
+  if (!this.isModified('password')) {
+    next()
+  }
+
+  // ONLY DO THIS IS PASSWORD IS SENTT OR MIDIFIED
+  // we need the salt THEN hash the PW asynchronously
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt)
+})
+
+
 // mongoose.model cause we want to create a model from schema above
 const User = mongoose.model('User', userSchema)
 
